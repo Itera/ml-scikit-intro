@@ -67,7 +67,7 @@ class ExpectedValueClassifier(ClassifierMixin):
         :param X: A matrix of size (m,n). The features of the data we want to predict.
         :return: A vector of labels. Length m.
         """
-        return np.asarray([self.most_frequent_class] * X.shape[0])
+        return np.asarray([self.most_frequent_class] * np.asarray(X).shape[0])
 
 
 def split_and_shuffle_data_set(data: np.ndarray, labels: np.ndarray, train_proportion: float=0.8):
