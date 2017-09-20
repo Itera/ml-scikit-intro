@@ -21,12 +21,12 @@ def __validate_model(pipeline, training_data: iter, test_data: iter, training_la
     print('Done. Your RMSE was : {}'.format(score))
     print('For reference just guessing would have yielded: {}'.format(random_score))
 
-    if score < 1:
+    if score < 2:
         print('Wow, well done!')
-    elif score < 2:
+    elif score < 2.25:
         print('You are officially a wizard. You can keep banging your head, or move on to the images :)')
-    elif score < 2.5:
-        print('Getting below 2.5 is not easy. Good job! You can keep banging your head, or move on to the images :)')
+    elif score < 2.7:
+        print('Getting below 2.7 is not easy. Good job! You can keep banging your head, or move on to the images :)')
     elif score < 3:
         print('Keep going. You are below three. Try tuning some more!')
     elif score < 4:
