@@ -1,0 +1,9 @@
+# IDE specific stuff
+.idea
+
+# Filetypes
+*.sav
+*.pyc
+*.mat
+*.tmp.*
+env/
