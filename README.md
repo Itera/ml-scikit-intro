@@ -25,36 +25,36 @@ document classification is text classification.
   the anticipated request from users is influencing how documents are being
   classified.
 
-### Linguistic morphology 
+### Linguistic morphology
 Before we can use the data set, we have to extract the features we want to use.
 There are several ways to extract these features. Some normal techniques are:
 
-1. **Tokenization** is the process of delimiting a string of input characters. 
-    The resulting tokens are then passed on to some other form of processing.  
+1. **Tokenization** is the process of delimiting a string of input characters.
+    The resulting tokens are then passed on to some other form of processing.
     E.g. `The quick brown fox jumps over the lazy dog => [the, quick, brown, fox,
     jumps, over, the, lazy, dog]`
-2. **Stemming** is the process of reducing inflected (or sometimes derived) words 
-    to their word stem, base or root form.  
+2. **Stemming** is the process of reducing inflected (or sometimes derived) words
+    to their word stem, base or root form.
     E.g. `cats, catlike, catty => cat`, or the special form where the stem is not
     itself a word `argue, argued, argues, arguing => argu`
-3. **Lemmatization** is the process of grouping together the inflected forms of a 
+3. **Lemmatization** is the process of grouping together the inflected forms of a
     word so they can be analysed as a single item, identified by the word's lemma,
-    or dictionary form.  
+    or dictionary form.
     E.g. `am, are, is => be`
 4. Removing **stop words** is a way to remove irrelevant data. Any group of words
-    can be chosen as the stop words for a given purpose. This means that stop 
-    words are the words that don't provide any context for the given task at hand.  
+    can be chosen as the stop words for a given purpose. This means that stop
+    words are the words that don't provide any context for the given task at hand.
     E.g. `a, and, as, at, in, the`
 5. The **bag-of-words** (BoW) model is used to look at the frequency of each word
-    in a document. All words in the corpus (text samples) form a dictionary.  
+    in a document. All words in the corpus (text samples) form a dictionary.
     E.g.: The vocabulary `["John", "likes", "to", "watch", "movies", "Mary", "too",
     "also", "football", "games"]` applied to the text `John likes to watch movies.
     Mary likes movies too.` will form the vector `[1, 2, 1, 1, 2, 1, 1, 0, 0, 0]`.
-6. **n-gram** is another probabilistic model. Instead of counting the frequency of 
-    words, as in BoW, one counts sequences of *n* words.   
-    E.g.: If one would like to extract the vocabulary from `Cats dance funny on 
-    the Internet.`, it would result in:  
-    2-gram: `['Cats dance', 'dance funny', 'funny on', 'on the', 'the Internet']`   
+6. **n-gram** is another probabilistic model. Instead of counting the frequency of
+    words, as in BoW, one counts sequences of *n* words.
+    E.g.: If one would like to extract the vocabulary from `Cats dance funny on
+    the Internet.`, it would result in:
+    2-gram: `['Cats dance', 'dance funny', 'funny on', 'on the', 'the Internet']`
     3-gram: `['Cats dance funny', 'dance funny on', ' funny on the', 'on the Internet']`
 
 ### Choosing the right estimator
@@ -67,18 +67,18 @@ For choosing the right estimator we can use scikit's estimator chooser:
 
 ### Example: BoW and Linear SVM
 
-Vocabulary: `['yes', 'no']`   
-Messages: `["yes no yes no", "no yes yes", "no", "no no"]`   
+Vocabulary: `['yes', 'no']`
+Messages: `["yes no yes no", "no yes yes", "no", "no no"]`
 Labels: `[0, 1, 1, 0]`
 
 #### Feature extraction
-`"yes no yes no"` &rarr; `[2, 2]`  
-`"no yes yes"` &rarr; `[2, 1]`  
-`"no"` &rarr; `[0, 1]`  
+`"yes no yes no"` &rarr; `[2, 2]`
+`"no yes yes"` &rarr; `[2, 1]`
+`"no"` &rarr; `[0, 1]`
 `"no no"` &rarr; `[0, 2]`
 
 #### Fitting the linear SVM model
-Since we only have to features (frequency of 'yes' and 'no'), the linear SVM only has
+Since we only have two features (frequency of 'yes' and 'no'), the linear SVM only has
 two dimensions.
 
 ![Fitted SVM](files/svm_fit.png)
@@ -86,7 +86,7 @@ two dimensions.
 #### Classifying
 We get the sentence `"no yes no"`, and transforms it with Bow. This results in `[1, 2]`.
 
-The prediction will then be as follows:  
+The prediction will then be as follows:
 ![SVM Prediction](files/svm_predict.png)
 
 As we can easily see, this sentence will get classified as `0` (ham).
@@ -161,7 +161,7 @@ links in the text. They are spam, and may be bad for your health.
 
 Spam | SMS
 ---- | ----------------------
-0    | Fair enough, ... 
+0    | Fair enough, ...
 1    | Did you hear about ...
 
 #### 1a) Loading and splitting the data.
@@ -194,9 +194,9 @@ important things to keep in mind here:
   no added magic. This is a word bag model, and the predictor will therefore
   only be able to infer things from what words are present, not the structure of
   the sentences themselves.
-  
+
 A boolean vectorizer works by creating a vector for each document describing what words are present.
-For instance: given the training documents: ['a b c', 'c d'] and the test document ['a d e'] we want to transform them 
+For instance: given the training documents: ['a b c', 'c d'] and the test document ['a d e'] we want to transform them
 like so:
 
 Document  | Vector [a, b, c, d]   | Train?
@@ -253,7 +253,7 @@ The _classification report_ consists of three measures for each class, and one
 average:
 * Precision: When we say that something is a given class, how often are we
   right?
-* Recall: Out of all the test examples with that given label, how often many did
+* Recall: Out of all the test examples with that given label, how many did
   we correctly identify?
 * f1-score: A combination of those two scores. (2 * precision * recall /
   (precision + recall))
@@ -291,9 +291,9 @@ __Data set__:
 You can have a look at the data in the [review csv
 file.](files/review_data/review_source.csv).
 
-Positive | Rating | Review 
--------- | ------ | ----------------------------------------- 
-1        | 10     | A nicely done thriller with plenty of ... 
+Positive | Rating | Review
+-------- | ------ | -----------------------------------------
+1        | 10     | A nicely done thriller with plenty of ...
 0        | 2      | This film just goes around in circles ...
 
 As soon as you are happy with the results (this is very individual, but try to at
@@ -306,27 +306,27 @@ Execute the `extra.py` script with `python extra.py`.
 file: [number_classifier.py](tasks/number_classifier.py)
 
 In this extra task we want to classify bitmaps to numbers. Each bitmap is
-represented by a 1d-array. When you are done with all subtasks, you will 
+represented by a 1d-array. When you are done with all subtasks, you will
 get printed the wrongly classified numbers.
 
-As seen here:   
+As seen here:
 ![Bitmap](files/bitmap_example.png)
 
-You can then try to optimize your solution. The steps closely resemble 
+You can then try to optimize your solution. The steps closely resemble
 the steps in main task 1.
 
 #### a) Splitting the data
 
-In this task we want to split the data set into training and test set. 
+In this task we want to split the data set into training and test set.
 > **Note:** return data in correct order.
 
 #### b) Fit feature extractor
 
-If you want to store some relevant information about the data set do 
+If you want to store some relevant information about the data set do
 that here, if not; just return `self`.
 
 #### c) Transform data
- 
+
 Transform the bitmaps to wanted representation, and return a numpy array.
 
 #### d) Training estimator
@@ -339,4 +339,4 @@ Awesome! You are through the tasks. If there is still time left in the course
 raise your hand and ask for some more to do.
 
 If you prefer not talking to us, go back to task 1 and implement the KNN
-estimator yourself, or keep improving the score in task 2. 
+estimator yourself, or keep improving the score in task 2.
