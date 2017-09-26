@@ -85,7 +85,7 @@ def run_spam_filter():
     data, labels = data_retriever.load_sms(cache_data=False, rows=row_count)
 
     # randomize and split the data
-    training_data, training_labels, test_data, test_labels = split_and_shuffle_data_set(data, labels)
+    training_data, test_data, training_labels, test_labels = split_and_shuffle_data_set(data, labels)
 
     # fit the transformer
     extractor = SMSFeatureExtractor()

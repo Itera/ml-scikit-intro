@@ -45,7 +45,7 @@ def run_number_classifier():
     data, labels = data_retriever.load_mnist(rows)
 
     print('Splitting data...')
-    training_data, training_labels, test_data, test_labels = split_and_shuffle_data_set(data, labels)
+    training_data, test_data, training_labels, test_labels = split_and_shuffle_data_set(data, labels)
 
     print('Extracting features...')
     extractor = BitmapFeatureExtractor()
