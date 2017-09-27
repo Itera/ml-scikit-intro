@@ -59,11 +59,6 @@ class NumberClassifierTest(unittest.TestCase):
             self.fail("d) Estimator is not fitted/trained.")
 
 
-def run_test():
-    runner = unittest.TextTestRunner()
-    unittest.main(testRunner=runner)
-
-
 def approved():
     runner = unittest.TextTestRunner()
     result = runner.run(unittest.makeSuite(NumberClassifierTest))
