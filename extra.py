@@ -1,4 +1,5 @@
 from tasks.number_classifier import run_number_classifier
+from unit_tests import test_number_classifier
 
 """
 Parameters
@@ -10,4 +11,5 @@ rows: int
 """
 
 if __name__ == '__main__':
-    run_number_classifier()
+    if test_number_classifier.approved():
+        run_number_classifier()

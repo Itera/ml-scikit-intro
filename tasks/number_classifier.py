@@ -16,7 +16,7 @@ class BitmapFeatureExtractor(TransformerMixin):
         :param others: Stuff other modules might need.
         :return: The Transformer itself. This allows for method-chaining.
         """
-        raise NotImplementedError('b) You may store som relevant information about the data set here.')
+        return
         return self
 
     def transform(self, bitmaps, *others):
@@ -26,15 +26,15 @@ class BitmapFeatureExtractor(TransformerMixin):
         :param others: Stuff other modules might need.
         :return: The extracted features.
         """
-        raise NotImplementedError('c) Return the features. See docstring for more details.')
+        return
 
 
-def split_and_shuffle_data_set(data: np.ndarray, labels: np.ndarray, train_proportion: float=0.8):
-    raise NotImplementedError("a) You need to split the data.")
+def split_and_shuffle_data_set(data: np.ndarray, labels: np.ndarray, train_proportion: float = 0.8):
+    return
 
 
 def train_classifier(training_features, training_labels):
-    raise NotImplementedError("d) Choose estimator (or create your own), fit it and return it.")
+    return
 
 
 def run_number_classifier():
