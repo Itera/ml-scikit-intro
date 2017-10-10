@@ -1,5 +1,5 @@
+from help_functions import validate_tasks
 from tasks import number_classifier
-from unit_tests import validate_tasks
 
 """
 Parameters

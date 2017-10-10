@@ -1,6 +1,5 @@
-from help_functions import validate_regression
+from help_functions import validate_tasks, validate_regression
 from tasks import spam_filter
-from unit_tests import validate_tasks
 
 """
 Parameters
