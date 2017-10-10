@@ -1,5 +1,5 @@
-from tasks.number_classifier import run_number_classifier
-from unit_tests import test_number_classifier
+from tasks import number_classifier
+from unit_tests import validate_tasks
 
 """
 Parameters
@@ -11,5 +11,5 @@ rows: int
 """
 
 if __name__ == '__main__':
-    if test_number_classifier.approved():
-        run_number_classifier()
+    if validate_tasks.approved(number_classifier):
+        number_classifier.run_number_classifier()

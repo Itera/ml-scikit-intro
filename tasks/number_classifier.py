@@ -4,7 +4,7 @@ from help_functions import data_retriever
 from help_functions.validate_classifier import validate_model
 
 
-class BitmapFeatureExtractor(TransformerMixin):
+class FeatureExtractor(TransformerMixin):
     """
     Extracts features from the bitmap.
     """
@@ -16,8 +16,7 @@ class BitmapFeatureExtractor(TransformerMixin):
         :param others: Stuff other modules might need.
         :return: The Transformer itself. This allows for method-chaining.
         """
-        return
-        return self
+        raise NotImplementedError('b) You may store som relevant information about the data set here.')
 
     def transform(self, bitmaps, *others):
         """
@@ -26,15 +25,15 @@ class BitmapFeatureExtractor(TransformerMixin):
         :param others: Stuff other modules might need.
         :return: The extracted features.
         """
-        return
+        raise NotImplementedError('c) Implement transform method.')
 
 
 def split_and_shuffle_data_set(data: np.ndarray, labels: np.ndarray, train_proportion: float = 0.8):
-    return
+    raise NotImplementedError("You need to split the data")
 
 
 def train_classifier(training_features, training_labels):
-    return
+    raise NotImplementedError('d) Choose estimator (or create your own), fit it and return it.')
 
 
 def run_number_classifier():
@@ -48,7 +47,7 @@ def run_number_classifier():
     training_data, test_data, training_labels, test_labels = split_and_shuffle_data_set(data, labels)
 
     print('Extracting features...')
-    extractor = BitmapFeatureExtractor()
+    extractor = FeatureExtractor()
     extractor.fit(training_data)
     training_features = extractor.transform(training_data)
     test_features = extractor.transform(test_data)
