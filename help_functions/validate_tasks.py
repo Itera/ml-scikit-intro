@@ -1,11 +1,18 @@
 import collections
 import numpy as np
 
-data = np.array([[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9]])
-labels = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+source = {0: [0, 0], 1: [1, 1], 2: [2, 2], 3: [3, 3], 4: [4, 4], 5: [5, 5], 6: [6, 6], 7: [7, 7], 8: [8, 8], 9: [9, 9]}
+data = np.array(list(source.values()))
+labels = np.array(list(source.keys()))
 
 
-def validate_split_and_shuffle_data_set(task):
+def __validate_binding(feature, label, name):
+    for i, lbl in enumerate(label):
+        assert source[lbl][0] == feature[i][0], '%s: Binding between feature and label must be preserved.' % name
+        assert source[lbl][1] == feature[i][1], '%s: Binding between feature and label must be preserved.' % name
+
+
+def __validate_split_and_shuffle_data_set(task):
     output = task.split_and_shuffle_data_set(data, labels)
     name = 'split_and_shuffle_data_set'
 
@@ -19,6 +26,9 @@ def validate_split_and_shuffle_data_set(task):
     assert type(data) == type(test_data), type_err
     assert type(labels) == type(training_labels), type_err
     assert type(labels) == type(test_labels), type_err
+
+    __validate_binding(training_data, training_labels, name)
+    __validate_binding(test_data, test_labels, name)
 
     assert isinstance(training_data[0], collections.Iterable), '%s: First return value must be subset of data.' % name
     assert isinstance(test_data[0], collections.Iterable), '%s: Second return value must be subset of data.' % name
@@ -36,7 +46,7 @@ def validate_split_and_shuffle_data_set(task):
         assert len(labels) - i == len(test_l), '%s: Length of test labels does not match train_proportion' % name
 
 
-def validate_feature_extractor(task):
+def __validate_feature_extractor(task):
     extractor = task.FeatureExtractor()
     name = 'FeatureExtractor'
 
@@ -44,7 +54,7 @@ def validate_feature_extractor(task):
     assert extractor.transform(data) is not None, '%s: Return the features. See docstring for more details.' % name
 
 
-def validate_train_classifier(task):
+def __validate_train_classifier(task):
     clf = task.train_classifier(data, labels)
     name = 'train_classifier'
 
@@ -52,9 +62,11 @@ def validate_train_classifier(task):
     assert getattr(clf, "fit", None) is not None, '%s: Estimator must have method fit().' % name
     assert getattr(clf, "predict", None) is not None, '%s: Estimator must have method predict().' % name
 
+    clf.predict(data)
+
 
 def approved(task):
-    validate_split_and_shuffle_data_set(task)
-    validate_feature_extractor(task)
-    validate_train_classifier(task)
+    __validate_split_and_shuffle_data_set(task)
+    __validate_feature_extractor(task)
+    __validate_train_classifier(task)
     return True
