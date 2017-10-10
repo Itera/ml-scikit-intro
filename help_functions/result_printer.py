@@ -40,6 +40,12 @@ def print_wrong_predictions(src_data: iter, predictions: iter, labels: iter, top
     """
     j = 0
 
+    template = '{:>10} | {:<10} | {:<}'
+    print('%d wrongly classified instances:' % top)
+
+    if not bitmap:
+        print(template.format('Label', 'Prediction', 'Data'))
+
     for i, label in enumerate(labels):
         if j >= top >= 0:
             break
@@ -51,4 +57,4 @@ def print_wrong_predictions(src_data: iter, predictions: iter, labels: iter, top
                 plt.figure().canvas.set_window_title('%d/%d' % (j, top))
                 __print_bitmap(src_data[i], labels[i], predictions[i])
             else:
-                print('Label: %s Predicted: %s Msg: %s' % (label, predictions[i], src_data[i]))
+                print(template.format(str(label), str(predictions[i]), str(src_data[i])))
