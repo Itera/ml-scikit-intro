@@ -27,13 +27,16 @@ def __validate_split_and_shuffle_data_set(task):
     assert type(labels) == type(training_labels), type_err
     assert type(labels) == type(test_labels), type_err
 
-    __validate_binding(training_data, training_labels, name)
-    __validate_binding(test_data, test_labels, name)
-
     assert isinstance(training_data[0], collections.Iterable), '%s: First return value must be subset of data.' % name
     assert isinstance(test_data[0], collections.Iterable), '%s: Second return value must be subset of data.' % name
     assert not isinstance(training_labels[0], collections.Iterable), '%s: Third return value must be subset of labels.' % name
     assert not isinstance(test_labels[0], collections.Iterable), '%s: Fourth return value must be subset of labels.' % name
+
+    assert len(training_data) == len(training_labels), '%s: Data and labels must have same length.' % name
+    assert len(test_data) == len(test_labels), '%s: Data and labels must have same length.' % name
+
+    __validate_binding(training_data, training_labels, name)
+    __validate_binding(test_data, test_labels, name)
 
     for i in range(0, 10):
         scale = i / 10
