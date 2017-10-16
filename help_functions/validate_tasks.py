@@ -49,12 +49,12 @@ def __validate_split_and_shuffle_data_set(task):
         assert len(labels) - i == len(test_l), '%s: Length of test labels does not match train_proportion' % name
 
 
-def __validate_feature_extractor(task):
+def __validate_feature_extractor(task, real_data):
     extractor = task.FeatureExtractor()
     name = 'FeatureExtractor'
 
-    assert type(extractor.fit(data)) == type(extractor), '%s: Fit method is supposed to return self.' % name
-    assert extractor.transform(data) is not None, '%s: Return the features. See docstring for more details.' % name
+    assert type(extractor.fit(real_data)) == type(extractor), '%s: Fit method is supposed to return self.' % name
+    assert extractor.transform(real_data) is not None, '%s: Return the features. See docstring for more details.' % name
 
 
 def __validate_train_classifier(task):
@@ -68,8 +68,9 @@ def __validate_train_classifier(task):
     clf.predict(data)
 
 
-def approved(task):
+def approved(task, data_retriever):
+    real_data = data_retriever(rows=10)
     __validate_split_and_shuffle_data_set(task)
-    __validate_feature_extractor(task)
+    __validate_feature_extractor(task, real_data)
     __validate_train_classifier(task)
     return True

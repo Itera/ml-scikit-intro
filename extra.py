@@ -1,4 +1,4 @@
-from help_functions import validate_tasks
+from help_functions import validate_tasks, data_retriever
 from tasks import number_classifier
 
 """
@@ -11,5 +11,5 @@ rows: int
 """
 
 if __name__ == '__main__':
-    if validate_tasks.approved(number_classifier):
+    if validate_tasks.approved(number_classifier, data_retriever.load_mnist):
         number_classifier.run_number_classifier()
