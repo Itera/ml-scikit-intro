@@ -69,7 +69,7 @@ def __validate_train_classifier(task):
 
 
 def approved(task, data_retriever):
-    real_data = data_retriever(rows=10)
+    real_data, _ = data_retriever(rows=10)
     __validate_split_and_shuffle_data_set(task)
     __validate_feature_extractor(task, real_data)
     __validate_train_classifier(task)
