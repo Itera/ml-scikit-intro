@@ -1,5 +1,6 @@
-from help_functions import validate_regression
-from tasks.spam_filter import run_spam_filter
+from help_functions import validate_tasks, validate_regression, data_retriever
+from tasks import spam_filter
+
 """
 Parameters
 ----------
@@ -10,6 +11,7 @@ rows: int
 """
 
 if __name__ == '__main__':
-    run_spam_filter()
-    print("If you are satisfied with the results, uncomment the guy underneath me to start task 2. (im in main.py :D)")
-    # validate_regression.execute_sentiment_analysis(cache_data=False, rows=5000)
+    if validate_tasks.approved(spam_filter, data_retriever.load_sms):
+        spam_filter.run_spam_filter()
+        print("\n\nIf you are satisfied with the results, uncomment next line to start task 2. (in main.py)")
+        # validate_regression.execute_sentiment_analysis(cache_data=False, rows=5000)

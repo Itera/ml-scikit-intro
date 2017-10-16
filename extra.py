@@ -1,4 +1,5 @@
-from tasks.number_classifier import run_number_classifier
+from help_functions import validate_tasks, data_retriever
+from tasks import number_classifier
 
 """
 Parameters
@@ -10,4 +11,5 @@ rows: int
 """
 
 if __name__ == '__main__':
-    run_number_classifier()
+    if validate_tasks.approved(number_classifier, data_retriever.load_mnist):
+        number_classifier.run_number_classifier()

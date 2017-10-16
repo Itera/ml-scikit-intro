@@ -4,7 +4,7 @@ from help_functions import data_retriever
 from help_functions.validate_classifier import validate_model
 
 
-class SMSFeatureExtractor(TransformerMixin):
+class FeatureExtractor(TransformerMixin):
     """
     We are going to make a Transformer.
     Transformers are generally used for two things:
@@ -21,8 +21,7 @@ class SMSFeatureExtractor(TransformerMixin):
         :param others: Stuff other scikit-learn modules might tack on, that we will ignore.
         :return: The Transformer itself. This allows for method-chaining.
         """
-        raise NotImplementedError('You should store all the distinct words here.')
-        return self
+        raise NotImplementedError('FeatureExtractor: You should store all the distinct words here.')
 
     def transform(self, documents, *others):
         """
@@ -32,7 +31,7 @@ class SMSFeatureExtractor(TransformerMixin):
         :param others: Stuff other scikit-learn modules might tack on, that we will ignore.
         :return: An NxM matrix where N is the amount of text messages and M is the amount of features (words).
         """
-        raise NotImplementedError('Return the features. See docstring for more details.')
+        raise NotImplementedError('FeatureExtractor: Return the features. See docstring for more details.')
 
 
 class ExpectedValueClassifier(ClassifierMixin):
@@ -71,10 +70,11 @@ class ExpectedValueClassifier(ClassifierMixin):
 
 
 def split_and_shuffle_data_set(data: np.ndarray, labels: np.ndarray, train_proportion: float=0.8):
-    raise NotImplementedError("You need to split the data! Look at the powerpoint or raise your hand if you are stuck :)")
+    raise NotImplementedError("split_and_shuffle_data_set: You need to split the data")
 
 
 def train_classifier(training_features, training_labels):
+    raise NotImplementedError('train_classifier: Choose estimator or create your own (as above), fit it and return it.')
     return ExpectedValueClassifier().fit(training_features, training_labels)
 
 
@@ -88,7 +88,7 @@ def run_spam_filter():
     training_data, test_data, training_labels, test_labels = split_and_shuffle_data_set(data, labels)
 
     # fit the transformer
-    extractor = SMSFeatureExtractor()
+    extractor = FeatureExtractor()
     extractor.fit(training_data)
 
     # extract the features from the test data
