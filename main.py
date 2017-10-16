@@ -13,5 +13,5 @@ rows: int
 if __name__ == '__main__':
     if validate_tasks.approved(spam_filter, data_retriever.load_sms):
         spam_filter.run_spam_filter()
-        print("If you are satisfied with the results, uncomment next line to start task 2. (in main.py)")
+        print("\n\nIf you are satisfied with the results, uncomment next line to start task 2. (in main.py)")
         # validate_regression.execute_sentiment_analysis(cache_data=False, rows=5000)
