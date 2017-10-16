@@ -18,8 +18,9 @@ def __validate_model(pipeline, training_data: iter, test_data: iter, training_la
     random_labels = np.random.randint(low=1, high=11, size=len(predicted_labels))
     random_score = __rmse(random_labels, test_labels)
 
+    print('\n\n------------------ RESULTS ------------------')
     print('Done. Your RMSE was : {}'.format(score))
-    print('For reference just guessing would have yielded: {}'.format(random_score))
+    print('For reference just guessing would have yielded: {}\n'.format(random_score))
 
     if score < 2:
         print('Wow, well done!')
@@ -42,10 +43,13 @@ def __display_results(data, target, predicted):
 
     example_count = 5
 
-    print('-------- LETS LOOK AT SOME EXAMPLES --------')
-    for example in sample(miss_size, example_count):
-        print('Target: {1} Predicted: {2} Miss: {3} \nText: {0}'.format(*example))
+    template = '{1:>10} | {2:<20} | {3:<20} | {0:<}'
 
+    print('\n-------- LETS LOOK AT SOME EXAMPLES --------')
+    print(template.format('Text', 'Target', 'Predicted', 'Miss'))
+
+    for example in sample(miss_size, example_count):
+        print(template.format(*example))
 
 def execute_sentiment_analysis(rows: int = -1, cache_data: bool = False):
     print('-- Executing sentiment analysis')
